@@ -11,5 +11,6 @@ integración en Hlidskjalf, el riesgo AB04 (reprogramación por el puerto serie)
 del Mega y recorrido del cable.
 
 Hecho (draft): conexión de los sensores por Cat6 (`docs/02-design/conexion-sensores.md`).
+Hecho (proposed): ADR-0001, enlace al tanque por Cat6 con el Mega junto a midgard.
 
 Registrar Urd en `docs/00-project/naming.md` de Yggdrasil, como se hizo con Bragi.

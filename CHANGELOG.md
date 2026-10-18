@@ -14,6 +14,9 @@ El cierre de cada gate AI-DLC corta versión (Gate 0 → 0.1.0, Gate 1 → 0.2.0
   a midgard por USB con aislador ADuM3160, Cat6 de ~9 m hasta el tanque con un par por señal,
   pines, mapa del cable T568B, protecciones, dominio aislado, presupuesto de energía, lista de
   materiales y prueba en banco.
+- ADR-0001 (proposed): enlace al tanque con el Mega junto a midgard, aislador ADuM3160 y sensores
+  por Cat6; `/dev/urd` atado al número de serie del Mega original; RS-485 como plan B si falla la
+  prueba en banco.
 
 ## [0.1.0] - 2026-10-18
 
