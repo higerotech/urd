@@ -20,6 +20,15 @@
   USB a midgard. El chip USB del Mega original (ATmega16U2 en la R3, ATmega8U2 en las
   revisiones anteriores) se anuncia con el fabricante `2341` y un **número de serie único**, y va
   a full speed (12 Mbit/s).
+- **Verificado en midgard el 2026-10-18**, con el Mega enchufado:
+  - `2341:0010`: primera generación del Mega 2560, con chip USB ATmega8U2. La R3 se anuncia como
+    `0042`.
+  - Driver `cdc_acm` y `/dev/ttyACM0` (grupo `dialout`), a full speed (12 Mbit/s). La placa pide
+    100 mA y midgard no suspende el puerto.
+  - El número de serie, de 20 caracteres, aparece en `ID_SERIAL_SHORT`.
+  - **ModemManager está activo en midgard** y marca el puerto como candidato
+    (`ID_MM_CANDIDATE=1`). Al enchufar el Mega lo sondeó: le mandó comandos AT antes de
+    descartarlo.
 - Jeremi propuso el 2026-10-18 llevar Cat6 hasta los sensores y alimentar el Arduino desde el USB
   de midgard.
 
@@ -32,8 +41,10 @@
    Mega. El detalle de pines, cable, protecciones y materiales está en
    [conexión de los sensores](../../02-design/conexion-sensores.md).
 3. **El nombre fijo del puerto (RNF01) se ata al número de serie** del chip USB del Mega:
-   `SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", ATTRS{serial}=="<serie>", SYMLINK+="urd"`. La regla
-   no depende del `idProduct`, que cambia según la revisión de la placa. El número de serie es un
+   `SUBSYSTEM=="tty", ATTRS{idVendor}=="2341", ATTRS{serial}=="<serie>", SYMLINK+="urd", ENV{ID_MM_DEVICE_IGNORE}="1"`.
+   La regla no depende del `idProduct`, que cambia según la revisión de la placa. El
+   `ID_MM_DEVICE_IGNORE` aparta a ModemManager del puerto: así no le escribe comandos AT al Mega en
+   cada reconexión, sin tener que desactivar el servicio en el router. El número de serie es un
    dato de la instalación (RS05): no va al repositorio. El bootstrap del Gate 4 lo lee en midgard
    con `udevadm info` y escribe allí la regla.
 4. **Antes de instalar, una prueba en banco** con ~10 m del mismo Cat6 (Gate 3, criterios en el
