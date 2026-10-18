@@ -14,7 +14,7 @@ Yggdrasil (`docs/00-project/naming.md`) y, como Bragi, vive en su propio reposit
 
 | Gate | Estado |
 |---|---|
-| 0 Requirements | Artefactos listos; falta HITL |
+| 0 Requirements | Aprobado (0.1.0) |
 | 1–5 | Pendientes |
 
 ## Números que mandan el diseño

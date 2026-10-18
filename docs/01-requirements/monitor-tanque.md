@@ -1,6 +1,6 @@
 # PRD — Monitor del tanque de agua (Urd)
 
-* **Estado:** review
+* **Estado:** approved
 * **Fecha:** 2026-10-18
 * **Decisores:** Jeremi
 * **Fase AI-DLC:** 01-requirements
@@ -41,9 +41,11 @@ Las cifras salen del tanque (Ø 1,30 × 2,60 m) y fijan qué se puede prometer:
   tercer estado, gris.
 - **La velocidad del sonido cambia un 0,18 % por °C.** Entre 20 y 40 °C, una distancia de 2 m se
   desvía ~7 cm (~94 L). Sin compensación térmica, el sol mueve el nivel.
-- **El PING))) mide de 2 cm a 3 m.** Con el tanque casi vacío, la distancia ronda los 2,6 m: cerca
-  del límite y con un eco más débil. Además, un haz de ~15° a 2,5 m abre un círculo de ~0,67 m de
-  radio, parecido al del tanque: con poco nivel puede rebotar en la pared.
+- **El HC-SR04 mide de 2 cm a 4 m.** Con el tanque casi vacío, la distancia ronda los 2,6 m:
+  dentro del rango, pero con un eco más débil. Además, un haz de ~15° a 2,5 m abre un círculo de
+  ~0,67 m de radio, parecido al del tanque: con poco nivel puede rebotar en la pared.
+- **El tanque está a ~9 m de midgard.** Un cable USB 2.0 pasivo admite 5 m. Los 9 m piden un
+  enlace activo o de otro tipo, y ese cable une el exterior con el router de la casa (RNF08).
 
 ## Requisitos funcionales
 | ID | Requisito | Verificación |
@@ -68,6 +70,7 @@ Las cifras salen del tanque (Ø 1,30 × 2,60 m) y fijan qué se puede prometer:
 | RNF05 | Una llegada con entrada neta ≥ 3 L/min se refleja en Hlidskjalf en ≤ 5 min |
 | RNF06 | Las muestras y las llegadas no salen de la LAN; solo sale el texto de los avisos |
 | RNF07 | Una lectura implausible (fuera de rango, salto imposible entre minutos, sensor sin respuesta) nunca llega al tablero como dato bueno: se descarta, se cuenta y, si persiste, dispara el aviso de sensor |
+| RNF08 | El enlace entre el Arduino y midgard cubre ~9 m sin errores sostenidos, y una falla eléctrica en el tramo del tanque (sobretensión, fuga a tierra) no puede llegar a midgard: hace falta aislamiento galvánico |
 
 ## Requisitos de seguridad (ASVS L1)
 | ID | Requisito | ASVS | OWASP Top 10:2025 |
@@ -91,6 +94,7 @@ Las cifras salen del tanque (Ø 1,30 × 2,60 m) y fijan qué se puede prometer:
 | AB06 | El disco de midgard corrompe la base o un apagón corta una escritura | RNF03 (WAL, respaldo nocturno, `integrity_check` en el respaldo) |
 | AB07 | El USB se desconecta y el tablero sigue enseñando el último nivel como si fuera actual | RNF01, estado **sin datos** (RF03) |
 | AB08 | Una llegada mientras se consume a la vez no se ve, y la flecha queda en rojo | Límite físico del balance neto: documentado, no se mitiga sin caudalímetro (no-scope) |
+| AB09 | Una sobretensión o una fuga a tierra en el tramo de 9 m entre el tanque y midgard daña el router de la casa | RNF08 (aislamiento galvánico); el enlace se elige en un ADR del Gate 1 |
 
 ## Contexto
 
@@ -246,13 +250,16 @@ quadrantChart
     Trama malformada tumba el servicio: [0.3, 0.4]
     Reprogramar el Arduino desde el contenedor: [0.1, 0.3]
     Patron de ocupacion expuesto: [0.15, 0.55]
+    Sobretension por el cable al router: [0.2, 0.85]
 ```
 *Eje trazabilidad · DREAD · Gate 0. El análisis completo, con STRIDE, irá en el Gate 1.*
 
 ## Decisiones tomadas (HITL, 2026-10-18)
 | Decisión | Alternativa recomendada que se descartó | Riesgo aceptado |
 |---|---|---|
-| Arduino por USB a midgard; el tanque está a menos de ~5 m | ESP32 por WiFi a Ratatosk; RS-485 | El tanque debe quedar al alcance de un cable USB |
+| Urd solo mide en esta etapa | — | Sin actuadores: no corta la bomba ni abre válvulas |
+| Arduino Mega 2560 por USB a midgard; el tanque está a ~9 m | ESP32 por WiFi a Ratatosk; Uno o Nano | 9 m superan los 5 m del USB 2.0 pasivo: el enlace (cable activo con aislador, RS-485 u otro) se decide en un ADR del Gate 1. Un Mega clónico con CH340 no trae número de serie, y la regla udev tendría que ir por puerto |
 | DHT11 en la cabeza del tanque | DS18B20 sumergible para el agua | Mide el aire, no el agua; ±2 °C; puede fallar por condensación |
-| PING))) o HC-SR04 | JSN-SR04T impermeable; sensor de presión | Ecos falsos por condensación a la larga |
+| HC-SR04 (trigger y echo) | JSN-SR04T impermeable; sensor de presión | Ecos falsos por condensación a la larga |
 | Flecha de tres estados, sin caudalímetro | Caudalímetro YF-B6 en la entrada | Con el tanque lleno no se sabe si hay agua en la calle |
+| Umbrales iniciales propuestos: error ≤ 3 %; llegada ≥ 3 L/min durante 3 min, visible en ≤ 5 min; tanque bajo < 20 %; fuga ≥ 0,5 L/min durante 60 min entre las 02:00 y las 05:00; muestras por minuto 400 días | — | Son de partida: se revisan con datos reales en el Gate 5 |

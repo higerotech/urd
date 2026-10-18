@@ -1,6 +1,6 @@
 # Clasificación de datos — Urd
 
-* **Estado:** review
+* **Estado:** approved
 * **Fecha:** 2026-10-18
 * **Decisores:** Jeremi
 * **Fase AI-DLC:** 00-project

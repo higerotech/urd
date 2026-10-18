@@ -1,6 +1,6 @@
 # Glosario — lenguaje ubicuo de Urd
 
-* **Estado:** review
+* **Estado:** approved
 * **Fecha:** 2026-10-18
 * **Decisores:** Jeremi
 * **Fase AI-DLC:** 00-project
@@ -20,7 +20,7 @@
 | **Lectura** | Una medida cruda de los sensores. El Arduino envía varias por minuto. |
 | **Muestra** | El resumen de un minuto (mediana de las lecturas válidas). Es lo que se guarda en SQLite. |
 | **Compensación térmica** | Corregir la distancia con la velocidad del sonido a la temperatura del aire del tanque. |
-| **Zona ciega** | Distancia mínima que el ultrasonido no puede medir (unos 2 cm en el PING)))). |
+| **Zona ciega** | Distancia mínima que el ultrasonido no puede medir (unos 2 cm en el HC-SR04). |
 | **Balance neto** | Lo que entra menos lo que sale. El nivel solo mide esto: con agua entrando y saliendo a la vez, solo se ve la diferencia. |
 | **Consumo** | Litros por minuto que salen del tanque cuando no entra agua. |
 | **Entrada neta** | Litros por minuto que suben mientras entra agua. |
