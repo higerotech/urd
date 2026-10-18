@@ -30,7 +30,7 @@ Del tanque, un Q'Botella 3200 (Ø 1,30 × 2,60 m, 3100 L útiles):
 
 ```
 docs/
-  00-project/           # charter, glosario, clasificación de datos
+  00-project/           # charter, glosario, clasificación de datos y ADRs
   01-requirements/      # PRD con límites físicos, abuso, ASVS y threat assessment
   02-design/            # diseño: conexión de los sensores por Cat6
 .ai-dlc/gates/          # checklists de gates

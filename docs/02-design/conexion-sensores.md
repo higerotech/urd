@@ -15,7 +15,8 @@ USB corto, que pasa por un aislador ADuM3160. Hasta el tanque solo van los senso
 pasa de sus 5 m, el Mega se reprograma a mano sin subir al tanque y no hace falta el enchufe del
 tanque.
 
-La elección del enlace frente a RS-485 se registra en un ADR del Gate 1. Este documento es el
+La elección del enlace frente a RS-485 está en
+[ADR-0001](../00-project/adr/ADR-0001-enlace-al-tanque-por-cat6.md). Este documento es el
 detalle de la conexión.
 
 ## Vista general
@@ -57,6 +58,7 @@ del otro: un solo mazo de cables.
 
 | Pin | Uso | Por qué ese pin |
 |---|---|---|
+| USB | Al ADuM3160. El Mega es original (Jeremi, 2026-10-18): su chip USB trae número de serie, y la regla udev de `/dev/urd` se ata a él (ADR-0001) | Conector USB-B de la placa |
 | 5V | Alimentación de los sensores, a través del PTC | Sale del USB del Mega (polyfuse de 500 mA) |
 | GND | Retorno común | Extremo del conector doble |
 | D47 | TRIG del HC-SR04 (salida, pulso de 10 µs) | Libre y junto a los otros dos |
@@ -233,6 +235,4 @@ Si el ECHO no cumple el punto 1, el plan B usa el mismo Cat6 para RS-485: el Meg
 del tanque, alimentado del enchufe de allá, y en midgard entra un adaptador USB a RS-485 aislado.
 
 ## Pendiente
-- Saber si el Mega es original (chip USB ATmega16U2, con número de serie) o un clon con CH340 (sin
-  número de serie: la regla udev iría por el puerto físico).
 - Medir el recorrido real del cable para ajustar la holgura.
