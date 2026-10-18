@@ -14,8 +14,26 @@ Yggdrasil (`docs/00-project/naming.md`) y, como Bragi, vive en su propio reposit
 
 | Gate | Estado |
 |---|---|
-| 0 Requirements | En curso |
+| 0 Requirements | Artefactos listos; falta HITL |
 | 1–5 | Pendientes |
+
+## Números que mandan el diseño
+
+Del tanque, un Q'Botella 3200 (Ø 1,30 × 2,60 m, 3100 L útiles):
+
+- El cuerpo guarda **13,3 L por cm**: un centímetro de error son 13 L.
+- La parte alta no es cilíndrica (un cilindro tendría 3451 L): el volumen se calibra en sitio.
+- Una ducha baja el nivel ~0,7 cm/min y se mide bien; 2 L sueltos (1,5 mm) quedan bajo el ruido.
+- Entre 20 y 40 °C, sin compensación térmica, el ultrasonido se desvía ~7 cm (~94 L) a 2 m.
+
+## Estructura
+
+```
+docs/
+  00-project/           # charter, glosario, clasificación de datos
+  01-requirements/      # PRD con límites físicos, abuso, ASVS y threat assessment
+.ai-dlc/gates/          # checklists de gates
+```
 
 ## Anonimización
 
