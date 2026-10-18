@@ -1,0 +1,22 @@
+.env
+deploy/.env
+*.bak-*
+
+# Python
+__pycache__/
+*.py[cod]
+.venv/
+.pytest_cache/
+.coverage
+.mypy_cache/
+.ruff_cache/
+
+# Base de datos y calibracion de una instalacion real
+*.sqlite
+*.sqlite-wal
+*.sqlite-shm
+*.db
+
+# Arduino / PlatformIO
+.pio/
+build/
