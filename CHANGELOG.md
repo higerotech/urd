@@ -9,6 +9,12 @@ El cierre de cada gate AI-DLC corta versión (Gate 0 → 0.1.0, Gate 1 → 0.2.0
 
 ## [Unreleased]
 
+### Añadido
+- Diseño de la conexión de los sensores (`docs/02-design/conexion-sensores.md`): Mega 2560 junto
+  a midgard por USB con aislador ADuM3160, Cat6 de ~9 m hasta el tanque con un par por señal,
+  pines, mapa del cable T568B, protecciones, dominio aislado, presupuesto de energía, lista de
+  materiales y prueba en banco.
+
 ## [0.1.0] - 2026-10-18
 
 Gate 0 aprobado por Jeremi: en esta etapa Urd solo mide, con los umbrales iniciales propuestos,
