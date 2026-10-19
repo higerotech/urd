@@ -12,5 +12,6 @@ del Mega y recorrido del cable.
 
 Hecho (draft): conexión de los sensores por Cat6 (`docs/02-design/conexion-sensores.md`).
 Hecho (proposed): ADR-0001, enlace al tanque por Cat6 con el Mega junto a midgard.
+Hecho (draft): contrato de la trama serie URD1 (`docs/02-design/contrato-serie.md`).
 
 Registrar Urd en `docs/00-project/naming.md` de Yggdrasil, como se hizo con Bragi.

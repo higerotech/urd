@@ -17,6 +17,10 @@ El cierre de cada gate AI-DLC corta versión (Gate 0 → 0.1.0, Gate 1 → 0.2.0
 - ADR-0001 (proposed): enlace al tanque con el Mega junto a midgard, aislador ADuM3160 y sensores
   por Cat6; `/dev/urd` atado al número de serie del Mega original; RS-485 como plan B si falla la
   prueba en banco.
+- Contrato de la trama serie URD1 (`docs/02-design/contrato-serie.md`): unidireccional, líneas
+  ASCII con versión y suma XOR, tramas de arranque (H), nivel (M, cinco ecos crudos por segundo) y
+  ambiente (A, DHT11 cada 10 s), validación en seis pasos con 14 vectores de prueba, estados del
+  enlace, reinicio por DTR en lugar de watchdog y métricas del enlace.
 
 ## [0.1.0] - 2026-10-18
 
